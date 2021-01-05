@@ -1,0 +1,9 @@
+# IntelliJ files
+/.idea/
+/out/
+
+# Settings
+/src/se/martenb/iv1351/soundgood/integration/SettingsDatabaseSchool.java
+
+# Libraries
+/lib/
