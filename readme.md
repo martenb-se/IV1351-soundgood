@@ -14,7 +14,7 @@ This project is made possible with:
 ### Database
 
 Database file:
-[./resources/soundgood_music_school.sql](https://github.com/martenb-se/IV1351-soundgood/blob/master/resource/soundgood_music_school.sql)
+[./resources/soundgood_music_school.sql](https://github.com/martenb-se/IV1351-soundgood/blob/master/resources/soundgood_music_school.sql)
 
 Go into the **PostgreSQL interactive terminal**
 ```
@@ -32,7 +32,7 @@ $ \i './resource/soundgood_music_school.sql';
 
 ### Data
 Data file:
-[./resources/soundgood_music_school_test_data.sql](https://github.com/martenb-se/IV1351-soundgood/blob/master/resource/soundgood_music_school_test_data.sql)
+[./resources/soundgood_music_school_test_data.sql](https://github.com/martenb-se/IV1351-soundgood/blob/master/resources/soundgood_music_school_test_data.sql)
 
 Import the database data into the same database as above.
 ```
@@ -41,7 +41,7 @@ $ \i './resource/soundgood_music_school_test_data.sql';
 
 #### Data Generation
 Script file: 
-[./resources/generate.data.js](https://github.com/martenb-se/IV1351-soundgood/blob/master/resource/generate.data.js)
+[./resources/generate.data.js](https://github.com/martenb-se/IV1351-soundgood/blob/master/resources/generate.data.js)
 
 To generate new data, run the generation script in Node and send the output to the new file. 
 The script will generate data for a valid database state (but the data has no other logical 
