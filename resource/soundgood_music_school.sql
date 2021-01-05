@@ -4,6 +4,19 @@
 SET client_encoding = 'UTF8';
 
 --
+-- Clear old indexes
+--
+DROP INDEX IF EXISTS "instrument_rental_instrument_in_stock_id";
+DROP INDEX IF EXISTS "instrument_rental_date_to";
+DROP INDEX IF EXISTS "instrument_in_stock_instrument_id";
+DROP INDEX IF EXISTS "individual_lesson_period_calendar_day_date";
+DROP INDEX IF EXISTS "booked_individual_lesson_on_individual_lesson_period_ilpi";
+DROP INDEX IF EXISTS "group_lesson_slot_calendar_day_date";
+DROP INDEX IF EXISTS "scheduled_lesson_instructor_person_id";
+DROP INDEX IF EXISTS "individual_lesson_instructor_person_id";
+DROP INDEX IF EXISTS "genre_name";
+
+--
 -- Clear old views
 -- 
 DROP VIEW IF EXISTS "query_upcoming_lesson_group" CASCADE;
@@ -727,8 +740,8 @@ GROUP BY
   year, 
   month
 ORDER BY 
-  year ASC,
-  month ASC;
+  year,
+  month;
   
 CREATE VIEW olap_monthly_rentals_type AS SELECT
   extract(year from ins_rnt.date_from) as year, 
@@ -770,8 +783,8 @@ GROUP BY
   year, 
   month
 ORDER BY 
-  year ASC,
-  month ASC;
+  year,
+  month;
   
 CREATE VIEW olap_monthly_lesson_group AS SELECT
   extract(year from gls.calendar_day_date) as year, 
@@ -789,8 +802,8 @@ GROUP BY
   year, 
   month
 ORDER BY 
-  year ASC,
-  month ASC;
+  year,
+  month;
   
 CREATE VIEW olap_monthly_lesson_ensemble AS SELECT
   extract(year from gls.calendar_day_date) as year, 
@@ -808,8 +821,8 @@ GROUP BY
   year, 
   month
 ORDER BY 
-  year ASC,
-  month ASC;
+  year,
+  month;
   
 CREATE VIEW olap_monthly_lesson AS SELECT
   ind.year,
@@ -906,7 +919,7 @@ FROM (
   ) AS en
 ) AS totals
 ORDER BY
-  instructor_person_id ASC;
+  instructor_person_id;
 
 CREATE MATERIALIZED VIEW olap_last_month_lessons_given AS SELECT
   instructor_person_id,
@@ -991,9 +1004,7 @@ FROM (
   ) AS en
 ) AS totals
 ORDER BY
-  instructor_person_id ASC;
-  
-
+  instructor_person_id;
   
 CREATE VIEW query_active_rentals AS SELECT
   active_rentals.instrument_in_stock_id,
@@ -1022,7 +1033,7 @@ WHERE date_to IS NULL
 GROUP BY
   student_person_id
 ORDER BY
-  student_person_id ASC;
+  student_person_id;
   
 CREATE VIEW query_upcoming_lesson_group AS SELECT
   ugls_bp.group_lesson_slot_id,
@@ -1071,14 +1082,14 @@ FROM (
 ) AS ugls_bp
 NATURAL JOIN group_lesson AS gl
 ORDER BY
-  ugls_bp.calendar_day_date ASC, 
-  ugls_bp.start_time ASC,
-  gl.instrument_id ASC,
+  ugls_bp.calendar_day_date, 
+  ugls_bp.start_time,
+  gl.instrument_id,
   CASE 
     WHEN gl.skill_level = 'beginner' THEN '1'
     WHEN gl.skill_level = 'intermediate' THEN '2'
-    ELSE 3 END ASC,
-  ugls_bp.place ASC;
+    ELSE 3 END,
+  ugls_bp.place;
 --
 -- Triggers
 --
@@ -1109,3 +1120,16 @@ CREATE TRIGGER tr_instrument_rental_not_available
   AFTER INSERT ON instrument_rental
     FOR EACH STATEMENT
       EXECUTE FUNCTION procedure_check_available_stock();
+
+--
+-- Indexes
+--
+CREATE INDEX instrument_rental_instrument_in_stock_id ON instrument_rental (instrument_in_stock_id);
+CREATE INDEX instrument_rental_date_to ON instrument_rental (date_to);
+CREATE INDEX instrument_in_stock_instrument_id ON instrument_in_stock (instrument_id);
+CREATE INDEX individual_lesson_period_calendar_day_date ON individual_lesson_period (calendar_day_date);
+CREATE INDEX booked_individual_lesson_on_individual_lesson_period_ilpi ON booked_individual_lesson_on_individual_lesson_period (individual_lesson_period_id);
+CREATE INDEX group_lesson_slot_calendar_day_date ON group_lesson_slot (calendar_day_date);
+CREATE INDEX scheduled_lesson_instructor_person_id ON scheduled_lesson (instructor_person_id);
+CREATE INDEX individual_lesson_instructor_person_id ON individual_lesson (instructor_person_id);
+CREATE INDEX genre_name ON genre (name);
