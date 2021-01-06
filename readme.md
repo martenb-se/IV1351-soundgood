@@ -11,10 +11,15 @@ This project is made possible with:
 
 
 ## Install
-### Database
+### Clone
+Clone the repository
+```
+$ git clone git@github.com:martenb-se/IV1351-soundgood.git
+```
 
-Database file:
-[./resources/soundgood_music_school.sql](https://github.com/martenb-se/IV1351-soundgood/blob/master/resources/soundgood_music_school.sql)
+### Database
+Install the database file
+([./resources/soundgood_music_school.sql](https://github.com/martenb-se/IV1351-soundgood/blob/master/resources/soundgood_music_school.sql))
 
 Go into the **PostgreSQL interactive terminal**
 ```
@@ -97,9 +102,23 @@ Replace
 - `[DATABASE_USER]` with the database user.
 - `[DATABASE_PASSWORD]` with the database password.
 
+#### Maven: Install and Test the java application
+It's easiest to install, test and run the application using Maven: 
+[Apache.org - Installing Apache Maven](https://maven.apache.org/install.html)
+Make sure you have installed and set up the database before installing.
+Go to the project root and run:
+```
+$ mvn install
+```
+
+#### Maven: Running
+```
+$ mvn exec:java
+```
+
 ## Troubleshooting
 ### Missing Driver
-When running, if you are met by the following message:
+When installing manually and running without Maven, if you are met by the following message:
 ``` 
 se.martenb.iv1351.soundgood.integration.SchoolDBException: Could not connect to the database.
 ...
