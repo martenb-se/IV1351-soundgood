@@ -13,6 +13,7 @@
 package se.martenb.iv1351.soundgood.util;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AmountTest {
