@@ -8,7 +8,81 @@ This project is made possible with:
 * **Node 15.2.1** for data generation.
 
 ## Sample printout
+```
+##############################
+#                            #
+#   SOUNDGOOD MUSIC SCHOOL   #
+#                            #
+############[DeveloperView]###
 
+
+Select a log in method:
+1. Mobile BankID.
+2. Email and password.
+3. Student ID and password.
+4. Exit.
+   3
+   Enter your student ID:
+   S-000030
+   Enter your password:
+   [PASSWORD NOT REQUIRED IN DEVELOPER VIEW]
+   ~ Welcome Kenneth ~
+
+Available options:
+1. Search for an instrument to rent.
+2. Terminate an ongoing rental.
+3. Logout.
+   1
+   Search for an instrument by type:
+   piano
+1. Piano (keyboard)
+   Brand:	Gibson
+   Price:	159.00 SEK
+2. Piano (keyboard)
+   Brand:	Harman Professional
+   Price:	149.00 SEK
+3. Piano (keyboard)
+   Brand:	Yamaha
+   Price:	239.00 SEK
+4. Go back.
+   2
+   Selected:
+   Piano (keyboard)
+   Brand:	Harman Professional
+   Price:	149.00 SEK
+   Do you wish to rent this instrument? [Y/N]
+   y
+   Rental complete! Your instrument will be delivered to you within 5 hours.
+   Available options:
+1. Terminate an ongoing rental.
+2. Logout.
+   1
+   Select a rental of an instrument to terminate:
+1. Piano (keyboard)
+   Brand:	Harman Professional
+   Price:	149.00 SEK
+   Date:	2021-01-06
+2. Clavinet (keyboard)
+   Brand:	Gibson
+   Price:	179.00 SEK
+   Date:	2020-05-08
+3. Go back.
+   2
+   Selected:
+   Clavinet (keyboard)
+   Brand:	Gibson
+   Price:	179.00 SEK
+   Date:	2020-05-08
+   Do you wish to terminate rental of this instrument? [Y/N]
+   yes
+   Rental termination complete! Your instrument will be picked up within 5 hours.
+   Available options:
+1. Search for an instrument to rent.
+2. Terminate an ongoing rental.
+3. Logout.
+   3
+   Quitting..
+```
 
 ## Install
 ### Clone
@@ -32,7 +106,7 @@ $ CREATE DATABASE soundgood;
 Enter the desired database and import the above database structure.
 ```
 $ \c soundgood
-$ \i './resource/soundgood_music_school.sql';
+$ \i './resources/soundgood_music_school.sql'
 ```
 
 ### Data
@@ -41,7 +115,7 @@ Data file:
 
 Import the database data into the same database as above.
 ```
-$ \i './resource/soundgood_music_school_test_data.sql';
+$ \i './resources/soundgood_music_school_test_data.sql'
 ```
 
 #### Data Generation
@@ -53,12 +127,12 @@ The script will generate data for a valid database state (but the data has no ot
 restrictions and is only pseudorandomly generated). The script generates around 100 000 rows 
 and might take more than 30 seconds to finish.
 ```
-$ node ./resource/generate.data.js > "./resource/soundgood_music_school_test_data.sql"
+$ node ./resources/generate.data.js > "./resources/soundgood_music_school_test_data.sql"
 ```
 
 ### Application
 #### Database Setup
-Create a `SettingsDatabaseSchool.java`-file in `./src/se/martenb/iv1351/soundgood/integration` directory and 
+Create a `SettingsDatabaseSchool.java`-file in `./src/main/java/se/martenb/iv1351/soundgood/integration/` directory and 
 implement the `SettingsDatabase` methods as shown below:
 ```java
 package se.martenb.iv1351.soundgood.integration;
